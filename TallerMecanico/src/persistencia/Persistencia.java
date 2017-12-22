@@ -5,19 +5,28 @@
  */
 package persistencia;
 
-import excepciones.BDException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 import modelo.Auto;
+import modelo.Moto;
 import modelo.Vehiculo;
+import excepciones.BDException;
 
 /**
  *
  * @author Valeri
  */
-public class Persistencia {
+public abstract class Persistencia {
+    
+    private static final String SQL_INSERTAR_AUTOS = "INSERT INTO vehiculo"
+            + "(padron, chapa, nombrePropietario, marca, cantidadDePuertas, tipo)"
+            + "VALUES (?,?,?,?,?,'A')";
+    private static final String SQL_INSERTAR_MOTOS = "INSERT INTO vehiculo"
+            + "(padron, chapa, nombrePropietario, marca, cilindrada, anio, tipo"
+            + "VALUES (?,?,?,?,?,'M')";
     
     private static Connection miConexionBD = null;
     
@@ -35,12 +44,33 @@ public class Persistencia {
     }
     
     
-    
+/**
+ * Inserto un Vehículo nuevo en la base datos.
+ * @param vehiculo
+ * @throws BDException
+ * @throws SQLException 
+ */    
     private static void insertarVehiculo(Vehiculo vehiculo) throws BDException, SQLException {
         PreparedStatement ps;
-        if(vehiculo instanceof Auto)
-            ps = getConexionBD()
-        
+        if(vehiculo instanceof Auto){
+            ps = getConexionBD().prepareStatement(SQL_INSERTAR_AUTOS);
+            ps.setInt(1, vehiculo.getPadron());
+            ps.setString(2, vehiculo.getChapa());
+            ps.setString(3, vehiculo.getNombrePropietario());
+            ps.setString(4, vehiculo.getMarca());
+            ps.setInt(5, ((Auto)vehiculo).getCantidadDePuertas());
+            ps.executeUpdate();
+        }else{
+            ps = getConexionBD().prepareStatement(SQL_INSERTAR_MOTOS);
+            ps.setInt(1, vehiculo.getPadron());
+            ps.setString(2, vehiculo.getChapa());
+            ps.setString(3, vehiculo.getNombrePropietario());
+            ps.setString(4, vehiculo.getMarca());
+            ps.setInt(5, ((Moto)vehiculo).getCilindrada());
+            ps.setInt(6, ((Moto)vehiculo).getAnio());
+            ps.executeUpdate();
+        }
+            
     }
     
 }
