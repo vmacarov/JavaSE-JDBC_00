@@ -79,12 +79,12 @@
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" pref="28" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtAño" max="32767" attributes="0"/>
+                              <Component id="txtAnio" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButtonCrear" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonConfirmarVehiculo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -129,12 +129,12 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtAño" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtAnio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCilindrada" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonCrear" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonConfirmarVehiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonVolver" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -149,10 +149,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtPropietario">
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonCrear">
+    <Component class="javax.swing.JButton" name="jButtonConfirmarVehiculo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="crear"/>
+        <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConfirmarVehiculoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonVolver">
       <Properties>
@@ -218,7 +221,7 @@
         <Property name="text" type="java.lang.String" value="A&#xf1;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtA&#xf1;o">
+    <Component class="javax.swing.JTextField" name="txtAnio">
     </Component>
     <Component class="javax.swing.JTextField" name="txtCilindrada">
     </Component>

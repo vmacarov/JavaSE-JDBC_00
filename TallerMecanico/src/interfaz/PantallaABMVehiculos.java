@@ -36,6 +36,11 @@ public class PantallaABMVehiculos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(listaVehiculos);
 
         botonAgregar.setText("+");
+        botonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAgregarActionPerformed(evt);
+            }
+        });
 
         botonEliminar.setText("-");
 
@@ -74,6 +79,10 @@ public class PantallaABMVehiculos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
+        //PantallaEdicionVehiculo pev = new PantallaEdicionVehiculo(null, closable)
+    }//GEN-LAST:event_botonAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

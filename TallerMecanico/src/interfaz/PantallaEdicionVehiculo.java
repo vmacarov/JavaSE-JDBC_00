@@ -5,11 +5,17 @@
  */
 package interfaz;
 
+import excepciones.BDException;
+import javax.swing.JOptionPane;
+import modelo.Vehiculo;
+
 /**
  *
  * @author Valeri
  */
 public class PantallaEdicionVehiculo extends javax.swing.JDialog {
+    
+    private Vehiculo vehiculoEnEdicion = null;
 
     /**
      * Creates new form PantallaEdicionVehiculo
@@ -32,7 +38,7 @@ public class PantallaEdicionVehiculo extends javax.swing.JDialog {
         txtPadron = new javax.swing.JTextField();
         txtChapa = new javax.swing.JTextField();
         txtPropietario = new javax.swing.JTextField();
-        jButtonCrear = new javax.swing.JButton();
+        jButtonConfirmarVehiculo = new javax.swing.JButton();
         jButtonVolver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -45,13 +51,18 @@ public class PantallaEdicionVehiculo extends javax.swing.JDialog {
         txtPuertas = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtAño = new javax.swing.JTextField();
+        txtAnio = new javax.swing.JTextField();
         txtCilindrada = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Edición Vehículo");
 
-        jButtonCrear.setText("crear");
+        jButtonConfirmarVehiculo.setText("Confirmar");
+        jButtonConfirmarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarVehiculoActionPerformed(evt);
+            }
+        });
 
         jButtonVolver.setText("volver");
 
@@ -123,11 +134,11 @@ public class PantallaEdicionVehiculo extends javax.swing.JDialog {
                                 .addGap(4, 4, 4)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAño)
+                                .addComponent(txtAnio)
                                 .addGap(214, 214, 214))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonCrear)
+                                .addComponent(jButtonConfirmarVehiculo)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
@@ -160,17 +171,50 @@ public class PantallaEdicionVehiculo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCrear)
+                    .addComponent(jButtonConfirmarVehiculo)
                     .addComponent(jButtonVolver))
                 .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonConfirmarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarVehiculoActionPerformed
+        try {
+            if(!"".equals(txtPadron.getText().trim()) && 
+                    !"".equals(txtChapa.getText().trim())){
+                if(vehiculoEnEdicion == null){ //ESTOY INSERTANDO.
+                    int padron = Integer.parseInt(txtPadron.getText().trim());
+                    int puertas = 0;
+                    int anio = 0;
+                    int cilindrada = 0;
+                    
+                    if(rbAuto.isSelected()){//SI ES TIPO AUTO.
+                        puertas = Integer.parseInt(txtPuertas.getText().trim());
+                        vehiculoEnEdicion = controller.ContoladoraVehiculos.
+                                CrearAuto(padron, txtChapa.getText(), txtPropietario.getText(),
+                                        txtMarca.getText(), puertas);
+                    }else{//SI ES TIPO MOTO.
+                        anio = Integer.parseInt(txtAnio.getText().trim());
+                        cilindrada = Integer.parseInt(txtCilindrada.getText().trim());
+                        vehiculoEnEdicion = controller.ContoladoraVehiculos.
+                                CrearMoto(padron, txtChapa.getText(), txtPropietario.getText(),
+                                        txtMarca.getText(), cilindrada, anio);
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Falta Informaciòn.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Verifique sus datos.");
+        }catch (BDException bde) {
+            JOptionPane.showMessageDialog(this, bde.getMessage());
+        }
+    }//GEN-LAST:event_jButtonConfirmarVehiculoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,7 +259,7 @@ public class PantallaEdicionVehiculo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCrear;
+    private javax.swing.JButton jButtonConfirmarVehiculo;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -227,7 +271,7 @@ public class PantallaEdicionVehiculo extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbAuto;
     private javax.swing.JRadioButton rbMoto;
     private javax.swing.ButtonGroup tipoVehiculo;
-    private javax.swing.JTextField txtAño;
+    private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtChapa;
     private javax.swing.JTextField txtCilindrada;
     private javax.swing.JTextField txtMarca;

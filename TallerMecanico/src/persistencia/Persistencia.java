@@ -43,6 +43,15 @@ public abstract class Persistencia {
         return miConexionBD;
     }
     
+    public static void Grabar(Vehiculo vehiculo) throws BDException{
+        PreparedStatement ps;
+        try {
+            insertarVehiculo(vehiculo);
+        } catch (Exception e) {
+            throw new  BDException("Error al grabar Vehiculo " + vehiculo.getPadron() + ".");   
+        }
+    }
+    
     
 /**
  * Inserto un Vehículo nuevo en la base datos.
