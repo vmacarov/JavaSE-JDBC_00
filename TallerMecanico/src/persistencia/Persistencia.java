@@ -69,6 +69,7 @@ public abstract class Persistencia {
             ps.setString(4, vehiculo.getMarca());
             ps.setInt(5, ((Auto)vehiculo).getCantidadDePuertas());
             ps.executeUpdate();
+            System.out.println("insertando auto: "+ ps);
         }else{
             ps = getConexionBD().prepareStatement(SQL_INSERTAR_MOTOS);
             ps.setInt(1, vehiculo.getPadron());
@@ -78,6 +79,7 @@ public abstract class Persistencia {
             ps.setInt(5, ((Moto)vehiculo).getCilindrada());
             ps.setInt(6, ((Moto)vehiculo).getAnio());
             ps.executeUpdate();
+            System.out.println("insertando moto: "+ ps);
         }
             
     }
