@@ -5,17 +5,29 @@
  */
 package interfaz;
 
+import java.awt.Container;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import modelo.Vehiculo;
+
 /**
  *
  * @author Valeri
  */
 public class PantallaABMVehiculos extends javax.swing.JInternalFrame {
-
+    
+    DefaultListModel<Vehiculo> model;
+    
     /**
      * Creates new form PantallaABMVehiculos
      */
     public PantallaABMVehiculos() {
         initComponents();
+        model = new DefaultListModel<>(); //repasar tema modelo.
+        this.listaVehiculos.setModel(model); //agregar objetos a la lista.
+        
     }
 
     /**
@@ -79,9 +91,36 @@ public class PantallaABMVehiculos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * BUSCO HACIA ARRIBA EN LA JERARQUÍA HASTA ENCONTRAR JFrame PRINCIPAL.
+     * @return 
+     */
+    private JFrame getFramePadre(){
+        Container c = this.getParent();
+        while (!(c instanceof JFrame))
+            c = (Container)c.getParent();
+        
+        return (JFrame)c;
+    }
+    
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
-        //PantallaEdicionVehiculo pev = new PantallaEdicionVehiculo(null, closable)
+        PantallaEdicionVehiculo pev = 
+                new PantallaEdicionVehiculo(getFramePadre(), true);
+        pev.setVisible(true);
+        pev.addWindowListener(new WindowAdapter() {
+            
+            @Override
+            public void windowClosed(WindowEvent we){
+                PantallaEdicionVehiculo pEv = (PantallaEdicionVehiculo)we.getSource();
+                Vehiculo v = pEv.getVehiculoEnEdicion();
+                if(v != null){
+                    model.addElement(v);
+                }
+            }
+
+        });
+        
     }//GEN-LAST:event_botonAgregarActionPerformed
 
 

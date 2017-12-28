@@ -17,6 +17,14 @@ public class PantallaEdicionVehiculo extends javax.swing.JDialog {
     
     private Vehiculo vehiculoEnEdicion = null;
 
+    public Vehiculo getVehiculoEnEdicion() {
+        return vehiculoEnEdicion;
+    }
+
+    public void setVehiculoEnEdicion(Vehiculo vehiculoEnEdicion) {
+        this.vehiculoEnEdicion = vehiculoEnEdicion;
+    }
+
     /**
      * Creates new form PantallaEdicionVehiculo
      */
