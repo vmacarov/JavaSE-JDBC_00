@@ -25,8 +25,8 @@ public abstract class Persistencia {
             + "(padron, chapa, nombrePropietario, marca, cantidadDePuertas, tipo)"
             + "VALUES (?,?,?,?,?,'A')";
     private static final String SQL_INSERTAR_MOTOS = "INSERT INTO vehiculo"
-            + "(padron, chapa, nombrePropietario, marca, cilindrada, anio, tipo"
-            + "VALUES (?,?,?,?,?,'M')";
+            + "(padron, chapa, nombrePropietario, marca, cilindrada, anio, tipo)"
+            + "VALUES (?,?,?,?,?,?,'M')";
     
     private static Connection miConexionBD = null;
     
